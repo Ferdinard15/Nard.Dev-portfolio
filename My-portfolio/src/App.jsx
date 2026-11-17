@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { Routes, Route } from "react-router";
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
 import { Navbar } from './Components/Navbar';
 import { PageLoader } from './Components/PageLoader/PageLoader';
 import { Hero } from './Components/Hero';
+import { ContactSection } from './Components/Contact Us/Contact';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +30,11 @@ function App() {
       <div className="min-h-screen bg-[#0b1120] text-white">
         <Navbar />
         {/* Your other sections (Hero, About, Projects, Contact, etc.) go here */}
-        <Hero />
+        
+        <Routes>
+          <Route path='/' element={<Hero />} />
+          <Route path='/contact' element={<ContactSection />} />
+        </Routes>
       </div>
     </>
   );
