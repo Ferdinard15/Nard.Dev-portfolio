@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { AboutWhoIAm } from "./ABoutWhoIAm";
 import { ServicesSection } from "./ServiceSection";
+import { OpportunitiesSection } from "./OpportunitiesSection";
 
 
 // GitHub Icon
@@ -645,6 +646,7 @@ export function About() {
 
     <AboutWhoIAm />
     <ServicesSection />
+    <OpportunitiesSection />
     </>
     
   );
