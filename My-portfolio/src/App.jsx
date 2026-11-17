@@ -4,8 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 import './App.css';
 import { Navbar } from './Components/Navbar';
 import { PageLoader } from './Components/PageLoader/PageLoader';
-import { Hero } from './Components/Hero';
-import { ContactSection } from './Components/Contact Us/Contact';
+import { Hero } from './Components/Hero'
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +33,6 @@ function App() {
         
         <Routes>
           <Route path='/' element={<Hero />} />
-          <Route path='/contact' element={<ContactSection />} />
         </Routes>
       </div>
     </>

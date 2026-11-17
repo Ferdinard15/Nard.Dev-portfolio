@@ -15,6 +15,9 @@ import {
 import { AboutSection } from "./pages/AboutSection";
 import { TechStack } from "./pages/TechStack";
 import { MyApproach } from "./pages/MyApproach";
+import { WhyChooseMe } from "./pages/WhyChooseMe";
+import { HowIWork } from "./pages/HowIWork";
+import { PortfolioCTA } from "./pages/PortfolioCTA";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -519,6 +522,9 @@ export function Hero() {
       <AboutSection />
       <TechStack />
       <MyApproach />
+      <WhyChooseMe />
+      <HowIWork />
+      <PortfolioCTA />
     </>
   );
 }

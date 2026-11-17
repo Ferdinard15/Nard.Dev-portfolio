@@ -85,7 +85,7 @@ export function Navbar() {
             to="/contact"
             className="flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-cyan-300"
           >
-            Let's Talk
+            Download CV
             <ArrowUpRight size={17} />
           </Link>
         </motion.div>
@@ -144,7 +144,7 @@ export function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="mt-3 flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-cyan-300"
               >
-                Let's Talk
+                Download CV
                 <ArrowUpRight size={18} />
               </Link>
             </div>
