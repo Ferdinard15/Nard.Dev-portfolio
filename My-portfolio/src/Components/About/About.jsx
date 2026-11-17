@@ -1,4 +1,6 @@
-import { useEffect, useRef } from "react";
+
+import { useEffect, useRef, useState } from "react";
+
 import {
   motion,
   animate,
@@ -6,6 +8,7 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
+
 import {
   Mail,
   MessageCircle,
@@ -13,6 +16,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 
+// GitHub Icon
 const GithubIcon = ({ size = 20 }) => (
   <svg
     width={size}
@@ -29,6 +33,7 @@ const GithubIcon = ({ size = 20 }) => (
   </svg>
 );
 
+// LinkedIn Icon
 const LinkedinIcon = ({ size = 20 }) => (
   <svg
     width={size}
@@ -119,7 +124,7 @@ const fadeUp = {
   },
 };
 
-// Animated counter component
+// Animated counter
 function AnimatedCounter({ value, suffix }) {
   const ref = useRef(null);
   const count = useMotionValue(0);
@@ -219,7 +224,10 @@ function StatCard({ stat, index }) {
   );
 }
 
+// Main About Component
 export function About() {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <section
       id="about"
@@ -237,9 +245,11 @@ export function About() {
 
       {/* Background glow */}
       <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
+
       <div className="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
+
         {/* Section heading */}
         <motion.div
           variants={containerVariants}
@@ -270,6 +280,7 @@ export function About() {
 
         {/* Main content */}
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+
           {/* LEFT CONTENT */}
           <motion.div
             variants={containerVariants}
@@ -291,6 +302,7 @@ export function About() {
             >
               I'm Ferdinard
               <br />
+
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
                 Nard.Dev
               </span>
@@ -398,7 +410,7 @@ export function About() {
             </div>
           </motion.div>
 
-          {/* RIGHT IMAGE */}
+          {/* RIGHT IMAGE - INTERACTIVE FLIP CARD */}
           <motion.div
             initial={{
               opacity: 0,
@@ -423,63 +435,180 @@ export function About() {
             {/* Outer glow */}
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-transparent opacity-70 blur-2xl" />
 
-            {/* Image container */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-[#101d30] p-2 shadow-2xl shadow-cyan-950/30"
+            {/* Flip card */}
+            <div
+              className="group relative h-[420px] cursor-pointer [perspective:1200px] sm:h-[500px]"
+              onMouseEnter={() => setIsFlipped(true)}
+              onMouseLeave={() => setIsFlipped(false)}
+              onClick={() => setIsFlipped((prev) => !prev)}
+              role="button"
+              tabIndex={0}
+              aria-label="Flip portrait to read about my technology journey"
+              aria-pressed={isFlipped}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setIsFlipped((prev) => !prev);
+                }
+              }}
             >
-              <div className="relative h-[420px] overflow-hidden rounded-[1.5rem] sm:h-[500px]">
-                <motion.img
-                  src="/Images/Nard.jpeg"
-                  alt="Ferdinard - Full-Stack Web Developer"
-                  initial={{
-                    scale: 1.15,
-                    filter: "grayscale(100%)",
+              <motion.div
+                animate={{
+                  rotateY: isFlipped ? 180 : 0,
+                }}
+                transition={{
+                  duration: 0.8,
+                  ease: [0.45, 0, 0.2, 1],
+                }}
+                style={{
+                  transformStyle: "preserve-3d",
+                }}
+                className="relative h-full w-full"
+              >
+                {/* FRONT - YOUR IMAGE */}
+                <div
+                  style={{
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                   }}
-                  whileInView={{
-                    scale: 1,
-                    filter: "grayscale(0%)",
-                  }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 1.5,
-                    ease: "easeOut",
-                  }}
-                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                />
+                  className="absolute inset-0 overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-[#101d30] p-2 shadow-2xl shadow-cyan-950/30"
+                >
+                  <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
+                    <img
+                      src="/Images/Nard.jpeg"
+                      alt="Ferdinard - Full-Stack Web Developer"
+                      className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
 
-                {/* Image gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-transparent to-transparent" />
+                    {/* Image gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-transparent to-transparent" />
 
-                {/* Image caption */}
-                <div className="absolute bottom-6 left-6">
-                  <p className="text-2xl font-extrabold tracking-wide text-white">
-                    Nard<span className="text-cyan-400">.Dev</span>
-                  </p>
+                    {/* Image caption */}
+                    <div className="absolute bottom-6 left-6">
+                      <p className="text-2xl font-extrabold tracking-wide text-white">
+                        Nard<span className="text-cyan-400">.Dev</span>
+                      </p>
 
-                  <p className="mt-1 text-xs tracking-[0.2em] text-slate-300">
-                    DESIGN. DEVELOP. DELIVER.
-                  </p>
+                      <p className="mt-1 text-xs tracking-[0.2em] text-slate-300">
+                        DESIGN. DEVELOP. DELIVER.
+                      </p>
+                    </div>
+
+                    {/* Floating code icon */}
+                    <motion.div
+                      animate={{
+                        y: [0, -12, 0],
+                        rotate: [0, 5, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-[#0b1120]/80 text-cyan-400 shadow-lg shadow-cyan-500/10 backdrop-blur-md"
+                    >
+                      <Code2 size={28} />
+                    </motion.div>
+
+                    {/* Hover instruction */}
+                    <div className="absolute bottom-6 right-5 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-xs text-white backdrop-blur-md">
+                      Hover to discover{" "}
+                      <span className="text-cyan-400">↗</span>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Floating code icon */}
-                <motion.div
-                  animate={{
-                    y: [0, -12, 0],
-                    rotate: [0, 5, 0],
+                {/* BACK - TECHNOLOGY JOURNEY */}
+                <div
+                  style={{
+                    transform: "rotateY(180deg)",
+                    backfaceVisibility: "hidden",
+                    WebkitBackfaceVisibility: "hidden",
                   }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-[#0b1120]/80 text-cyan-400 shadow-lg shadow-cyan-500/10 backdrop-blur-md"
+                  className="absolute inset-0 overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-[#101d30] p-2 shadow-2xl shadow-cyan-950/30"
                 >
-                  <Code2 size={28} />
-                </motion.div>
-              </div>
-            </motion.div>
+                  <div className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#0b1d32] via-[#102b45] to-[#07111f] px-7 text-center sm:px-10">
+
+                    {/* Animated background glow */}
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.3, 1],
+                        opacity: [0.15, 0.3, 0.15],
+                      }}
+                      transition={{
+                        duration: 5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cyan-400 blur-[90px]"
+                    />
+
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        opacity: [0.1, 0.25, 0.1],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-blue-500 blur-[90px]"
+                    />
+
+                    {/* Back content */}
+                    <div className="relative z-10">
+                      <motion.div
+                        initial={{
+                          scale: 0,
+                          rotate: -45,
+                        }}
+                        animate={{
+                          scale: 1,
+                          rotate: 0,
+                        }}
+                        transition={{
+                          duration: 0.7,
+                          type: "spring",
+                        }}
+                        className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-400 shadow-lg shadow-cyan-500/10"
+                      >
+                        <Code2 size={32} />
+                      </motion.div>
+
+                      <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-cyan-400">
+                        MY TECH JOURNEY
+                      </p>
+
+                      <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+                        Every line of code is a step towards{" "}
+                        <span className="text-cyan-400">
+                          something greater.
+                        </span>
+                      </h2>
+
+                      <div className="mx-auto my-6 h-[2px] w-16 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+
+                      <p className="text-sm leading-8 text-slate-300 sm:text-base">
+                        Technology has taught me that growth comes
+                        from curiosity, patience, consistency, and
+                        the courage to solve problems. Every
+                        challenge is an opportunity to learn, build,
+                        and become better.
+                      </p>
+
+                      <p className="mt-6 text-sm font-semibold italic text-cyan-400">
+                        "Learn. Build. Fail. Improve. Repeat."
+                      </p>
+
+                      <p className="mt-7 text-xs font-bold uppercase tracking-[0.25em] text-slate-500">
+                        NARD.DEV — THE JOURNEY CONTINUES
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
 
             {/* Floating profile badge */}
             <motion.div
@@ -491,7 +620,7 @@ export function About() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-cyan-400/20 bg-[#101d30]/95 p-4 shadow-xl shadow-black/30 backdrop-blur-xl sm:-left-8"
+              className="absolute -bottom-6 -left-4 z-20 flex items-center gap-3 rounded-2xl border border-cyan-400/20 bg-[#101d30]/95 p-4 shadow-xl shadow-black/30 backdrop-blur-xl sm:-left-8"
             >
               <span className="relative flex h-3 w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
@@ -502,6 +631,7 @@ export function About() {
                 <p className="text-sm font-bold text-white">
                   Open for projects
                 </p>
+
                 <p className="text-xs text-slate-400">
                   Let's build something great
                 </p>
@@ -518,3 +648,5 @@ export function About() {
     </section>
   );
 }
+
+
