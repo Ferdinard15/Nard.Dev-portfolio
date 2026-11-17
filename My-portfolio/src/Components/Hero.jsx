@@ -1,16 +1,14 @@
+
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowDown,
   ArrowRight,
-  ArrowUpRight,
   Check,
   Code2,
   Copy,
-  Menu,
   Sparkles,
   Terminal,
-  X,
 } from "lucide-react";
 import { AboutSection } from "./pages/AboutSection";
 import { TechStack } from "./pages/TechStack";
@@ -18,14 +16,6 @@ import { MyApproach } from "./pages/MyApproach";
 import { WhyChooseMe } from "./pages/WhyChooseMe";
 import { HowIWork } from "./pages/HowIWork";
 import { PortfolioCTA } from "./pages/PortfolioCTA";
-
-const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -37,15 +27,8 @@ const fadeUp = {
 };
 
 export function Hero() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("Home");
   const [activeTab, setActiveTab] = useState("profile");
   const [copied, setCopied] = useState(false);
-
-  const handleNavigation = (name) => {
-    setActiveLink(name);
-    setMenuOpen(false);
-  };
 
   const handleCopyCommand = () => {
     navigator.clipboard?.writeText("npx nard-dev --hire");
@@ -70,112 +53,9 @@ export function Hero() {
 
         <div className="pointer-events-none absolute -bottom-40 right-0 -z-10 h-[420px] w-[420px] rounded-full bg-blue-600/15 blur-[140px]" />
 
-        {/* STICKY NAVBAR */}
-        <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050b16]/75 backdrop-blur-xl">
-          <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-            {/* LOGO */}
-            <motion.a
-              href="#home"
-              onClick={() => handleNavigation("Home")}
-              whileHover={{ scale: 1.03 }}
-              className="text-2xl font-extrabold tracking-tight"
-            >
-              Nard<span className="text-cyan-400">.Dev</span>
-            </motion.a>
-
-            {/* DESKTOP LINKS */}
-            <div className="hidden items-center gap-9 md:flex">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => handleNavigation(link.name)}
-                  className={`relative py-2 text-sm font-medium transition-colors ${
-                    activeLink === link.name
-                      ? "text-cyan-400"
-                      : "text-slate-300 hover:text-white"
-                  }`}
-                >
-                  {link.name}
-
-                  <motion.span
-                    initial={false}
-                    animate={{
-                      width: activeLink === link.name ? "100%" : "0%",
-                    }}
-                    transition={{ duration: 0.25 }}
-                    className="absolute bottom-0 left-0 h-[2px] rounded-full bg-cyan-400"
-                  />
-                </a>
-              ))}
-            </div>
-
-            {/* DESKTOP CTA */}
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.04, y: -1 }}
-              whileTap={{ scale: 0.96 }}
-              className="hidden items-center gap-2 rounded-full border border-cyan-400/60 bg-cyan-400/5 px-5 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950 md:flex"
-            >
-              Let's Talk
-              <ArrowUpRight size={16} />
-            </motion.a>
-
-            {/* MOBILE MENU BUTTON */}
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
-              className="rounded-lg p-1.5 text-white transition hover:bg-white/10 md:hidden"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={menuOpen}
-            >
-              {menuOpen ? <X size={26} /> : <Menu size={26} />}
-            </button>
-          </nav>
-
-          {/* MOBILE MENU */}
-          <AnimatePresence>
-            {menuOpen && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.25 }}
-                className="overflow-hidden border-t border-white/10 bg-[#071426]/95 backdrop-blur-xl md:hidden"
-              >
-                <div className="flex flex-col gap-2 px-6 py-5">
-                  {navLinks.map((link, index) => (
-                    <motion.a
-                      key={link.name}
-                      href={link.href}
-                      onClick={() => handleNavigation(link.name)}
-                      initial={{ opacity: 0, x: -16 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                      className={`rounded-lg px-4 py-3 text-sm font-medium transition ${
-                        activeLink === link.name
-                          ? "bg-cyan-400/10 text-cyan-400"
-                          : "text-slate-300 hover:bg-white/5"
-                      }`}
-                    >
-                      {link.name}
-                    </motion.a>
-                  ))}
-
-                  <a
-                    href="#contact"
-                    onClick={() => handleNavigation("Contact")}
-                    className="mt-2 flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-5 py-3 font-bold text-slate-950"
-                  >
-                    Let's Talk <ArrowUpRight size={18} />
-                  </a>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </header>
-
         {/* HERO CONTENT */}
-        <div className="relative mx-auto grid min-h-[calc(100vh-76px)] max-w-7xl items-center gap-14 px-6 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10">
+        <div className="relative mx-auto grid min-h-[calc(100vh-76px)] max-w-7xl items-center gap-14 px-6 pt-28 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pt-24">
+
           {/* LEFT COLUMN */}
           <motion.div
             variants={{
@@ -226,7 +106,7 @@ export function Hero() {
               </p>
             </motion.div>
 
-            {/* TECH PILLS - FLOATING & HOVER ANIMATION */}
+            {/* TECH PILLS */}
             <motion.div
               variants={fadeUp}
               className="mt-6 flex flex-wrap gap-2.5"
@@ -341,6 +221,7 @@ export function Hero() {
 
             {/* CODE EDITOR CARD */}
             <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#091324]/90 shadow-2xl backdrop-blur-2xl">
+
               {/* WINDOW HEADER & TABS */}
               <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3">
                 <div className="flex items-center gap-2">

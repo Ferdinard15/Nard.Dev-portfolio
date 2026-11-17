@@ -2,16 +2,14 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from "react-router";
 import { AnimatePresence } from 'framer-motion';
 import './App.css';
-import { Navbar } from './Components/Navbar';
 import { PageLoader } from './Components/PageLoader/PageLoader';
-import { Hero } from './Components/Hero'
-
+import { Hero } from './Components/Hero';
+import { Layout } from './Components/Layout/Layout';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time (e.g., 1.5 seconds) or wait for assets to load
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
@@ -21,20 +19,18 @@ function App() {
 
   return (
     <>
-      {/* AnimatePresence handles the exit animation when isLoading becomes false */}
+      {/* 1. PageLoader stays outside Routes so it covers the whole screen on initial load */}
       <AnimatePresence mode="wait">
         {isLoading && <PageLoader key="page-loader" />}
       </AnimatePresence>
 
-      {/* Main Portfolio Content */}
-      <div className="min-h-screen bg-[#0b1120] text-white">
-        <Navbar />
-        {/* Your other sections (Hero, About, Projects, Contact, etc.) go here */}
-        
-        <Routes>
-          <Route path='/' element={<Hero />} />
-        </Routes>
-      </div>
+      {/* 2. Layout wraps your routes and automatically provides Navbar + Footer */}
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path="/" element={<Hero />} />
+          {/* Future routes go here */}
+        </Route>
+      </Routes>
     </>
   );
 }
