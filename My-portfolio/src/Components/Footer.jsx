@@ -1,7 +1,6 @@
 
 import { motion } from "framer-motion";
 import {
-  ArrowUp,
   ArrowUpRight,
   Mail,
   Phone,
@@ -135,12 +134,6 @@ const staggerContainer = {
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <footer className="relative isolate overflow-hidden bg-[#050b16] text-white">
@@ -402,21 +395,6 @@ export function Footer() {
               Ferdinard
             </span>
           </p>
-
-          {/* BACK TO TOP */}
-          <motion.button
-            type="button"
-            onClick={scrollToTop}
-            whileHover={{ y: -5, scale: 1.08 }}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Back to top"
-            className="group flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/20 bg-cyan-400/5 text-cyan-300 transition-all duration-300 hover:border-cyan-400/60 hover:bg-cyan-400/15 hover:shadow-lg hover:shadow-cyan-500/10"
-          >
-            <ArrowUp
-              size={20}
-              className="transition-transform duration-300 group-hover:-translate-y-1"
-            />
-          </motion.button>
 
         </div>
       </div>

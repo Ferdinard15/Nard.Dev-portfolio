@@ -5,6 +5,8 @@ import './App.css';
 import { PageLoader } from './Components/PageLoader/PageLoader';
 import { Hero } from './Components/Hero';
 import { Layout } from './Components/Layout/Layout';
+import { About } from './Components/About/About';
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +31,10 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Hero />} />
           {/* Future routes go here */}
+          <Route path='/about' element={<About />} />
+          <Route path='/skills' />
+          <Route path='projects' />
+          <Route path='/contact'  />
         </Route>
       </Routes>
     </>

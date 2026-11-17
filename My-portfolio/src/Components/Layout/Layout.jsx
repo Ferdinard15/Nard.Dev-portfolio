@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
 import { Navbar } from "../Navbar";
 import { Footer } from "../Footer";
+import { ScrollToTopButton } from "../ScrollToTopButton/ScrollTopButton";
 
 export function Layout() {
   return (
@@ -13,6 +14,9 @@ export function Layout() {
       </main>
 
       <Footer />
+
+      {/* Global Back to Top Button */}
+      <ScrollToTopButton />
     </div>
   );
 }
