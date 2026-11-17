@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { AboutWhoIAm } from "./ABoutWhoIAm";
+import { ServicesSection } from "./ServiceSection";
 
 
 // GitHub Icon
@@ -643,6 +644,7 @@ export function About() {
     </section>
 
     <AboutWhoIAm />
+    <ServicesSection />
     </>
     
   );
