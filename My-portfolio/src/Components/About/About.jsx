@@ -1,8 +1,16 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import {
+  motion,
+  animate,
+  useInView,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import {
   Mail,
   MessageCircle,
   Code2,
+  ArrowUpRight,
 } from "lucide-react";
 
 const GithubIcon = ({ size = 20 }) => (
@@ -38,6 +46,7 @@ const LinkedinIcon = ({ size = 20 }) => (
   </svg>
 );
 
+// Social media links
 const socialLinks = [
   {
     name: "GitHub",
@@ -61,6 +70,29 @@ const socialLinks = [
   },
 ];
 
+// Statistics
+const stats = [
+  {
+    value: 4,
+    suffix: "+",
+    label: "Projects Done",
+    description: "Built with passion",
+  },
+  {
+    value: 2,
+    suffix: "+",
+    label: "Happy Clients",
+    description: "Focused on results",
+  },
+  {
+    value: 100,
+    suffix: "%",
+    label: "Dedication",
+    description: "Always committed",
+  },
+];
+
+// Animation variants
 const containerVariants = {
   hidden: {},
   visible: {
@@ -73,96 +105,242 @@ const containerVariants = {
 const fadeUp = {
   hidden: {
     opacity: 0,
-    y: 30,
+    y: 35,
+    filter: "blur(8px)",
   },
   visible: {
     opacity: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 0.8,
       ease: "easeOut",
     },
   },
 };
 
+// Animated counter component
+function AnimatedCounter({ value, suffix }) {
+  const ref = useRef(null);
+  const count = useMotionValue(0);
+
+  const rounded = useTransform(count, (latest) =>
+    Math.round(latest)
+  );
+
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.5,
+  });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    const controls = animate(count, value, {
+      duration: 2,
+      ease: "easeOut",
+    });
+
+    return () => controls.stop();
+  }, [isInView, value, count]);
+
+  return (
+    <div ref={ref} className="flex items-center justify-center">
+      <motion.span className="text-3xl font-extrabold tracking-tight text-cyan-400 sm:text-4xl">
+        {rounded}
+      </motion.span>
+
+      <span className="text-2xl font-bold text-cyan-400 sm:text-3xl">
+        {suffix}
+      </span>
+    </div>
+  );
+}
+
+// Animated statistics card
+function StatCard({ stat, index }) {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 45,
+        scale: 0.9,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.4,
+      }}
+      transition={{
+        duration: 0.7,
+        delay: index * 0.2,
+        ease: "easeOut",
+      }}
+      whileHover={{
+        y: -8,
+        scale: 1.04,
+      }}
+      className="group relative overflow-hidden rounded-2xl border border-cyan-400/10 bg-[#101d30]/70 p-4 text-center shadow-lg shadow-black/10 backdrop-blur-md transition-all duration-500 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/10 sm:p-5"
+    >
+      {/* Hover glow */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/10 via-blue-500/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+      {/* Animated top border */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.8,
+          delay: index * 0.2 + 0.2,
+        }}
+        className="absolute left-0 top-0 h-[2px] w-full origin-left bg-gradient-to-r from-cyan-400 to-blue-500"
+      />
+
+      <div className="relative z-10">
+        <AnimatedCounter
+          value={stat.value}
+          suffix={stat.suffix}
+        />
+
+        <h3 className="mt-2 text-xs font-bold uppercase tracking-wider text-white sm:text-sm">
+          {stat.label}
+        </h3>
+
+        <p className="mt-1 text-[10px] text-slate-500 sm:text-xs">
+          {stat.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export function About() {
   return (
     <section
-      id="home"
-      className="relative isolate min-h-screen overflow-hidden bg-[#050b16] text-white"
+      id="about"
+      className="relative overflow-hidden bg-[#0b1120] px-5 py-24 text-white sm:px-8 lg:px-16"
     >
-      {/* BACKGROUND EFFECTS */}
+      {/* Background grid */}
       <div
-        className="pointer-events-none absolute inset-0 -z-20 opacity-[0.12]"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #334155 1px, transparent 1px), linear-gradient(to bottom, #334155 1px, transparent 1px)",
+            "linear-gradient(rgba(34,211,238,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(34,211,238,0.8) 1px, transparent 1px)",
           backgroundSize: "55px 55px",
         }}
       />
 
-      <div className="pointer-events-none absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-[130px]" />
+      {/* Background glow */}
+      <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
 
-      <div className="pointer-events-none absolute -bottom-40 right-0 -z-10 h-96 w-96 rounded-full bg-blue-600/10 blur-[130px]" />
-
-      {/* MAIN CONTENT */}
-      <main className="mx-auto grid min-h-screen max-w-7xl items-center gap-14 px-6 pb-20 pt-32 lg:grid-cols-12 lg:gap-12 lg:px-10 lg:py-20">
-        {/* LEFT CONTENT */}
+      <div className="relative z-10 mx-auto max-w-7xl">
+        {/* Section heading */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
-          animate="visible"
-          className="space-y-8 lg:col-span-7"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mb-14 text-center"
         >
-          {/* AVAILABILITY */}
-          <motion.div variants={fadeUp}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-emerald-300">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              Available for projects
-            </span>
-          </motion.div>
+          <motion.span
+            variants={fadeUp}
+            className="inline-block rounded-full border border-cyan-400/20 bg-cyan-400/5 px-5 py-2 text-xs font-semibold tracking-[0.25em] text-cyan-400"
+          >
+            GET TO KNOW ME
+          </motion.span>
 
-          {/* HEADING */}
-          <motion.div variants={fadeUp}>
-            <p className="mb-3 text-lg font-medium text-slate-400">
-              Hello, I'm
-            </p>
+          <motion.h2
+            variants={fadeUp}
+            className="mt-5 text-3xl font-extrabold sm:text-4xl lg:text-5xl"
+          >
+            About <span className="text-cyan-400">Me</span>
+          </motion.h2>
 
-            <h1 className="text-5xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-              Ferdinard
-              <span className="mt-2 block bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          <motion.div
+            variants={fadeUp}
+            className="mx-auto mt-4 h-1 w-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
+          />
+        </motion.div>
+
+        {/* Main content */}
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* LEFT CONTENT */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            className="order-2 lg:order-1"
+          >
+            <motion.p
+              variants={fadeUp}
+              className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400"
+            >
+              WELCOME TO MY PORTFOLIO
+            </motion.p>
+
+            <motion.h1
+              variants={fadeUp}
+              className="text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl"
+            >
+              I'm Ferdinard
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
                 Nard.Dev
               </span>
-            </h1>
+            </motion.h1>
 
-            <div className="mt-6 flex items-center gap-3">
-              <span className="h-[2px] w-12 rounded-full bg-cyan-400" />
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-300">
+            <motion.div
+              variants={fadeUp}
+              className="relative mt-5 inline-block"
+            >
+              <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-slate-300 sm:text-base">
                 Full-Stack Web Developer
-              </p>
-            </div>
-          </motion.div>
+              </h2>
 
-          {/* DESCRIPTION */}
-          <motion.p
-            variants={fadeUp}
-            className="max-w-xl text-lg leading-relaxed text-slate-400"
-          >
-            I design and build modern digital products that people love to use —
-            fast, clean, responsive, and accessible. I turn creative ideas into
-            functional web experiences using modern technologies.
-          </motion.p>
+              <motion.div
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 1,
+                  delay: 0.4,
+                }}
+                className="mt-2 h-[2px] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500"
+              />
+            </motion.div>
 
-          {/* SOCIAL LINKS */}
-          <motion.div variants={fadeUp} className="space-y-4">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500">
-              Connect with me
-            </p>
+            <motion.p
+              variants={fadeUp}
+              className="mt-7 max-w-xl text-sm leading-8 text-slate-400 sm:text-base"
+            >
+              I'm Ferdinard, a passionate Full-Stack Web Developer
+              focused on transforming ideas into beautiful,
+              functional, and scalable digital experiences. I build
+              modern web applications with clean code, intuitive
+              interfaces, and powerful functionality.
+            </motion.p>
 
-            <div className="flex flex-wrap items-center gap-3">
+            <motion.p
+              variants={fadeUp}
+              className="mt-4 max-w-xl text-sm leading-8 text-slate-400 sm:text-base"
+            >
+              I enjoy solving problems, learning new technologies,
+              and creating digital solutions that make a meaningful
+              impact.
+            </motion.p>
+
+            {/* Social links */}
+            <motion.div
+              variants={fadeUp}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
               {socialLinks.map((social, index) => {
                 const Icon = social.icon;
 
@@ -170,183 +348,173 @@ export function About() {
                   <motion.a
                     key={social.name}
                     href={social.href}
-                    target={social.name === "Email" ? undefined : "_blank"}
-                    rel={
-                      social.name === "Email"
-                        ? undefined
-                        : "noopener noreferrer"
+                    target={
+                      social.name === "Email" ? undefined : "_blank"
                     }
+                    rel="noopener noreferrer"
                     aria-label={social.name}
                     title={social.name}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      delay: 0.8 + index * 0.12,
-                      duration: 0.5,
+                    initial={{
+                      opacity: 0,
+                      y: 20,
                     }}
-                    whileHover={{ y: -6, scale: 1.08 }}
-                    whileTap={{ scale: 0.94 }}
-                    className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-slate-300 transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300 hover:shadow-lg hover:shadow-cyan-500/10"
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.7 + index * 0.12,
+                    }}
+                    whileHover={{
+                      y: -6,
+                      scale: 1.12,
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    className="flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/20 bg-[#101d30] text-slate-300 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400 hover:text-[#0b1120] hover:shadow-lg hover:shadow-cyan-500/20"
                   >
                     <Icon size={20} />
                   </motion.a>
                 );
               })}
+            </motion.div>
+
+            {/* Divider */}
+            <motion.div
+              variants={fadeUp}
+              className="my-9 h-px w-full bg-gradient-to-r from-cyan-400/30 via-slate-700 to-transparent"
+            />
+
+            {/* Animated statistics */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              {stats.map((stat, index) => (
+                <StatCard
+                  key={stat.label}
+                  stat={stat}
+                  index={index}
+                />
+              ))}
             </div>
           </motion.div>
 
-          {/* DIVIDER */}
+          {/* RIGHT IMAGE */}
           <motion.div
-            variants={fadeUp}
-            className="h-px w-full max-w-xl bg-gradient-to-r from-cyan-400/30 via-white/10 to-transparent"
-          />
-
-          {/* STATS */}
-          <motion.div
-            variants={fadeUp}
-            className="grid max-w-xl grid-cols-3 gap-5"
+            initial={{
+              opacity: 0,
+              x: 80,
+              scale: 0.9,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+              scale: 1,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 1,
+              ease: "easeOut",
+            }}
+            className="relative order-1 mx-auto w-full max-w-md lg:order-2"
           >
-            <div>
-              <h3 className="text-3xl font-bold text-white">
-                4<span className="text-cyan-400">+</span>
-              </h3>
-              <p className="mt-2 text-xs font-medium tracking-wider text-slate-500 sm:text-sm">
-                Projects done
-              </p>
-            </div>
+            {/* Outer glow */}
+            <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-transparent opacity-70 blur-2xl" />
 
-            <div>
-              <h3 className="text-3xl font-bold text-white">
-                2<span className="text-cyan-400">+</span>
-              </h3>
-              <p className="mt-2 text-xs font-medium tracking-wider text-slate-500 sm:text-sm">
-                Happy clients
-              </p>
-            </div>
+            {/* Image container */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.5 }}
+              className="group relative overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-[#101d30] p-2 shadow-2xl shadow-cyan-950/30"
+            >
+              <div className="relative h-[420px] overflow-hidden rounded-[1.5rem] sm:h-[500px]">
+                <motion.img
+                  src="/Images/Nard.jpeg"
+                  alt="Ferdinard - Full-Stack Web Developer"
+                  initial={{
+                    scale: 1.15,
+                    filter: "grayscale(100%)",
+                  }}
+                  whileInView={{
+                    scale: 1,
+                    filter: "grayscale(0%)",
+                  }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 1.5,
+                    ease: "easeOut",
+                  }}
+                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                />
 
-            <div>
-              <h3 className="text-3xl font-bold text-white">
-                100<span className="text-cyan-400">%</span>
-              </h3>
-              <p className="mt-2 text-xs font-medium tracking-wider text-slate-500 sm:text-sm">
-                Dedication
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
+                {/* Image gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-transparent to-transparent" />
 
-        {/* RIGHT CONTENT - PROFILE IMAGE */}
-        <motion.div
-          initial={{ opacity: 0, x: 70, scale: 0.94 }}
-          animate={{ opacity: 1, x: 0, scale: 1 }}
-          transition={{
-            duration: 1,
-            ease: [0.22, 1, 0.36, 1],
-            delay: 0.2,
-          }}
-          className="relative mx-auto w-full max-w-md lg:col-span-5 lg:justify-self-end"
-        >
-          {/* IMAGE GLOW */}
-          <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-br from-cyan-400/25 via-blue-500/20 to-transparent opacity-70 blur-2xl transition duration-700 hover:opacity-100" />
+                {/* Image caption */}
+                <div className="absolute bottom-6 left-6">
+                  <p className="text-2xl font-extrabold tracking-wide text-white">
+                    Nard<span className="text-cyan-400">.Dev</span>
+                  </p>
 
-          {/* IMAGE CONTAINER */}
-          <motion.div
-            whileHover={{ scale: 1.015 }}
-            transition={{ duration: 0.4 }}
-            className="group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#0b1a2c] shadow-2xl shadow-cyan-950/40"
-          >
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
-              <motion.img
-                src="/Images/Nard.jpeg"
-                alt="Ferdinard - Full-Stack Web Developer"
-                initial={{ scale: 1.12 }}
-                animate={{ scale: 1 }}
-                transition={{
-                  duration: 1.5,
-                  ease: "easeOut",
-                }}
-                className="h-full w-full object-cover object-center transition-all duration-700 group-hover:scale-105"
-              />
-
-              {/* IMAGE OVERLAY */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050b16]/80 via-transparent to-transparent" />
-
-              {/* IMAGE CAPTION */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 backdrop-blur-md">
-                    <Code2 size={21} />
-                  </div>
-
-                  <div>
-                    <p className="text-sm font-bold text-white">Nard.Dev</p>
-                    <p className="text-xs text-slate-300">
-                      Design. Develop. Deliver.
-                    </p>
-                  </div>
+                  <p className="mt-1 text-xs tracking-[0.2em] text-slate-300">
+                    DESIGN. DEVELOP. DELIVER.
+                  </p>
                 </div>
+
+                {/* Floating code icon */}
+                <motion.div
+                  animate={{
+                    y: [0, -12, 0],
+                    rotate: [0, 5, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-[#0b1120]/80 text-cyan-400 shadow-lg shadow-cyan-500/10 backdrop-blur-md"
+                >
+                  <Code2 size={28} />
+                </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          {/* FLOATING PROJECT BADGE */}
-          <motion.div
-            animate={{ y: [0, -9, 0] }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute -bottom-5 -left-5 flex items-center gap-3 rounded-full border border-emerald-400/20 bg-[#0b1a2c]/95 px-5 py-3 shadow-xl backdrop-blur-xl"
-          >
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.8)]" />
-            <span className="text-xs font-semibold text-white">
-              Open for projects
-            </span>
-          </motion.div>
-
-          {/* FLOATING CODE ICON */}
-          <motion.div
-            animate={{
-              rotate: [0, 360],
-              y: [0, -5, 0],
-            }}
-            transition={{
-              rotate: {
-                duration: 15,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              y: {
+            {/* Floating profile badge */}
+            <motion.div
+              animate={{
+                y: [0, -8, 0],
+              }}
+              transition={{
                 duration: 3,
                 repeat: Infinity,
                 ease: "easeInOut",
-              },
-            }}
-            className="absolute -right-5 -top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/20 bg-[#0b1a2c] text-cyan-400 shadow-xl"
-          >
-            <Code2 size={25} />
+              }}
+              className="absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl border border-cyan-400/20 bg-[#101d30]/95 p-4 shadow-xl shadow-black/30 backdrop-blur-xl sm:-left-8"
+            >
+              <span className="relative flex h-3 w-3">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex h-3 w-3 rounded-full bg-cyan-400" />
+              </span>
+
+              <div>
+                <p className="text-sm font-bold text-white">
+                  Open for projects
+                </p>
+                <p className="text-xs text-slate-400">
+                  Let's build something great
+                </p>
+              </div>
+
+              <ArrowUpRight
+                size={18}
+                className="text-cyan-400"
+              />
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </main>
-
-      {/* SCROLL INDICATOR */}
-      <motion.a
-        href="#about"
-        animate={{ y: [0, 7, 0] }}
-        transition={{
-          duration: 1.8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute bottom-5 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-xs text-slate-500 transition hover:text-cyan-300 md:flex"
-      >
-        Scroll to explore
-        <span className="text-cyan-400">↓</span>
-      </motion.a>
-
-      {/* BOTTOM BORDER */}
-      <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
+        </div>
+      </div>
     </section>
   );
 }
