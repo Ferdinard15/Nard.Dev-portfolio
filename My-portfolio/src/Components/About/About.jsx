@@ -1,6 +1,4 @@
-
 import { useEffect, useRef, useState } from "react";
-
 import {
   motion,
   animate,
@@ -8,13 +6,14 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-
 import {
   Mail,
   MessageCircle,
   Code2,
   ArrowUpRight,
 } from "lucide-react";
+import { AboutWhoIAm } from "./ABoutWhoIAm";
+
 
 // GitHub Icon
 const GithubIcon = ({ size = 20 }) => (
@@ -229,6 +228,7 @@ export function About() {
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
+    <>
     <section
       id="about"
       className="relative overflow-hidden bg-[#0b1120] px-5 py-24 text-white sm:px-8 lg:px-16"
@@ -245,11 +245,9 @@ export function About() {
 
       {/* Background glow */}
       <div className="pointer-events-none absolute -left-40 top-20 h-80 w-80 rounded-full bg-cyan-500/10 blur-[120px]" />
-
       <div className="pointer-events-none absolute -right-40 bottom-10 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
 
       <div className="relative z-10 mx-auto max-w-7xl">
-
         {/* Section heading */}
         <motion.div
           variants={containerVariants}
@@ -280,7 +278,6 @@ export function About() {
 
         {/* Main content */}
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-
           {/* LEFT CONTENT */}
           <motion.div
             variants={containerVariants}
@@ -302,7 +299,6 @@ export function About() {
             >
               I'm Ferdinard
               <br />
-
               <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
                 Nard.Dev
               </span>
@@ -435,7 +431,7 @@ export function About() {
             {/* Outer glow */}
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-transparent opacity-70 blur-2xl" />
 
-            {/* Flip card */}
+            {/* Flip card container */}
             <div
               className="group relative h-[420px] cursor-pointer [perspective:1200px] sm:h-[500px]"
               onMouseEnter={() => setIsFlipped(true)}
@@ -481,17 +477,12 @@ export function About() {
                     />
 
                     {/* Image gradient */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/90 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/95 via-[#07111f]/25 to-transparent" />
 
-                    {/* Image caption */}
-                    <div className="absolute bottom-6 left-6">
-                      <p className="text-2xl font-extrabold tracking-wide text-white">
-                        Nard<span className="text-cyan-400">.Dev</span>
-                      </p>
-
-                      <p className="mt-1 text-xs tracking-[0.2em] text-slate-300">
-                        DESIGN. DEVELOP. DELIVER.
-                      </p>
+                    {/* Hover instruction */}
+                    <div className="absolute left-5 top-5 rounded-full border border-white/20 bg-black/50 px-3.5 py-1.5 text-xs font-medium text-white backdrop-blur-md">
+                      Hover to discover{" "}
+                      <span className="text-cyan-400">↗</span>
                     </div>
 
                     {/* Floating code icon */}
@@ -505,15 +496,20 @@ export function About() {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      className="absolute right-5 top-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-400/30 bg-[#0b1120]/80 text-cyan-400 shadow-lg shadow-cyan-500/10 backdrop-blur-md"
+                      className="absolute right-5 top-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/30 bg-[#0b1120]/80 text-cyan-400 shadow-lg shadow-cyan-500/10 backdrop-blur-md sm:h-14 sm:w-14"
                     >
-                      <Code2 size={28} />
+                      <Code2 size={26} />
                     </motion.div>
 
-                    {/* Hover instruction */}
-                    <div className="absolute bottom-6 right-5 rounded-full border border-white/20 bg-black/40 px-4 py-2 text-xs text-white backdrop-blur-md">
-                      Hover to discover{" "}
-                      <span className="text-cyan-400">↗</span>
+                    {/* Image caption */}
+                    <div className="absolute bottom-9 left-6 right-6 sm:bottom-8">
+                      <p className="text-2xl font-extrabold tracking-wide text-white">
+                        Nard<span className="text-cyan-400">.Dev</span>
+                      </p>
+
+                      <p className="mt-1 text-xs font-medium tracking-[0.2em] text-slate-200">
+                        DESIGN. DEVELOP. DELIVER.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -527,8 +523,7 @@ export function About() {
                   }}
                   className="absolute inset-0 overflow-hidden rounded-[2rem] border border-cyan-400/30 bg-[#101d30] p-2 shadow-2xl shadow-cyan-950/30"
                 >
-                  <div className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#0b1d32] via-[#102b45] to-[#07111f] px-7 text-center sm:px-10">
-
+                  <div className="relative flex h-full flex-col items-center justify-center overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#0b1d32] via-[#102b45] to-[#07111f] px-6 py-6 text-center sm:px-8">
                     {/* Animated background glow */}
                     <motion.div
                       animate={{
@@ -557,7 +552,7 @@ export function About() {
                     />
 
                     {/* Back content */}
-                    <div className="relative z-10">
+                    <div className="relative z-10 flex flex-col items-center">
                       <motion.div
                         initial={{
                           scale: 0,
@@ -571,25 +566,25 @@ export function About() {
                           duration: 0.7,
                           type: "spring",
                         }}
-                        className="mx-auto mb-7 flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-400 shadow-lg shadow-cyan-500/10"
+                        className="mx-auto mb-3.5 flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/30 bg-cyan-400/10 text-cyan-400 shadow-lg shadow-cyan-500/10 sm:mb-4 sm:h-14 sm:w-14"
                       >
-                        <Code2 size={32} />
+                        <Code2 size={26} />
                       </motion.div>
 
-                      <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-cyan-400">
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-400">
                         MY TECH JOURNEY
                       </p>
 
-                      <h2 className="text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+                      <h2 className="text-xl font-extrabold leading-snug text-white sm:text-2xl">
                         Every line of code is a step towards{" "}
                         <span className="text-cyan-400">
                           something greater.
                         </span>
                       </h2>
 
-                      <div className="mx-auto my-6 h-[2px] w-16 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500" />
+                      <div className="mx-auto my-3.5 h-[2px] w-14 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 sm:my-4" />
 
-                      <p className="text-sm leading-8 text-slate-300 sm:text-base">
+                      <p className="text-xs leading-6 text-slate-300 sm:text-sm sm:leading-7">
                         Technology has taught me that growth comes
                         from curiosity, patience, consistency, and
                         the courage to solve problems. Every
@@ -597,11 +592,11 @@ export function About() {
                         and become better.
                       </p>
 
-                      <p className="mt-6 text-sm font-semibold italic text-cyan-400">
+                      <p className="mt-3.5 text-xs font-semibold italic text-cyan-400 sm:mt-4 sm:text-sm">
                         "Learn. Build. Fail. Improve. Repeat."
                       </p>
 
-                      <p className="mt-7 text-xs font-bold uppercase tracking-[0.25em] text-slate-500">
+                      <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.22em] text-slate-400 sm:mt-4 sm:text-xs">
                         NARD.DEV — THE JOURNEY CONTINUES
                       </p>
                     </div>
@@ -646,7 +641,9 @@ export function About() {
         </div>
       </div>
     </section>
+
+    <AboutWhoIAm />
+    </>
+    
   );
 }
-
-
