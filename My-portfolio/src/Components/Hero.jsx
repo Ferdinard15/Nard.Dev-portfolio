@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -55,7 +54,6 @@ export function Hero() {
 
         {/* HERO CONTENT */}
         <div className="relative mx-auto grid min-h-[calc(100vh-76px)] max-w-7xl items-center gap-14 px-6 pt-28 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pt-24">
-
           {/* LEFT COLUMN */}
           <motion.div
             variants={{
@@ -221,7 +219,6 @@ export function Hero() {
 
             {/* CODE EDITOR CARD */}
             <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#091324]/90 shadow-2xl backdrop-blur-2xl">
-
               {/* WINDOW HEADER & TABS */}
               <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3">
                 <div className="flex items-center gap-2">

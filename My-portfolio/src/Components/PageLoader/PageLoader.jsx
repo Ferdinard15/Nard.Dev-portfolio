@@ -54,7 +54,7 @@ export function PageLoader() {
         transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
         className="mt-6 text-xs font-semibold tracking-[0.2em] text-slate-400"
       >
-        LOADING EXPERIENCE...
+
       </motion.p>
 
       {/* GPU-Accelerated Progress Bar */}
