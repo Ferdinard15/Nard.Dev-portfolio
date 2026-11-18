@@ -1,8 +1,7 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, Download } from "lucide-react"; // Changed ArrowUpRight to Download for clarity
 
 const navLinks = [
   { name: "Home", to: "/" },
@@ -75,19 +74,22 @@ export function Navbar() {
           })}
         </div>
 
-        {/* Desktop Contact Button */}
+        {/* Desktop Download CV Button */}
         <motion.div
           whileHover={{ scale: 1.05, y: -2 }}
           whileTap={{ scale: 0.95 }}
           className="hidden md:flex"
         >
-          <Link
-            to="/contact"
+          <a
+            href="/cv.pdf"
+            download="Nard_Dev_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 rounded-full bg-cyan-400 px-5 py-2.5 text-sm font-bold text-slate-950 transition hover:bg-cyan-300"
           >
             Download CV
-            <ArrowUpRight size={17} />
-          </Link>
+            <Download size={17} />
+          </a>
         </motion.div>
 
         {/* Mobile Menu Button */}
@@ -138,15 +140,18 @@ export function Navbar() {
                 );
               })}
 
-              {/* Mobile Contact Button */}
-              <Link
-                to="/contact"
+              {/* Mobile Download CV Button */}
+              <a
+                href="/cv.pdf"
+                download="Nard_Dev_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMenuOpen(false)}
                 className="mt-3 flex items-center justify-center gap-2 rounded-full bg-cyan-400 px-5 py-3 font-bold text-slate-950 transition hover:bg-cyan-300"
               >
                 Download CV
-                <ArrowUpRight size={18} />
-              </Link>
+                <Download size={18} />
+              </a>
             </div>
           </motion.div>
         )}
@@ -154,5 +159,3 @@ export function Navbar() {
     </nav>
   );
 }
-
-

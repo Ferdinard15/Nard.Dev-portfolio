@@ -140,9 +140,9 @@ export function ContactForm() {
     e.preventDefault();
 
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
-      formData.subject
+      formData.subject,
     )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
     )}`;
 
     window.location.href = mailtoLink;
@@ -152,7 +152,6 @@ export function ContactForm() {
     <section className="py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-
           {/* LEFT SIDE */}
           <motion.div
             initial="hidden"
@@ -208,11 +207,7 @@ export function ContactForm() {
 
                 return (
                   <motion.div key={item.label} variants={fadeUp}>
-                    {item.href ? (
-                      <a href={item.href}>{content}</a>
-                    ) : (
-                      content
-                    )}
+                    {item.href ? <a href={item.href}>{content}</a> : content}
                   </motion.div>
                 );
               })}
@@ -308,7 +303,10 @@ export function ContactForm() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="contact-name" className="mb-2 block text-xs font-semibold text-slate-300">
+                    <label
+                      htmlFor="contact-name"
+                      className="mb-2 block text-xs font-semibold text-slate-300"
+                    >
                       Your Name
                     </label>
                     <input
@@ -324,7 +322,10 @@ export function ContactForm() {
                   </div>
 
                   <div>
-                    <label htmlFor="contact-email" className="mb-2 block text-xs font-semibold text-slate-300">
+                    <label
+                      htmlFor="contact-email"
+                      className="mb-2 block text-xs font-semibold text-slate-300"
+                    >
                       Email Address
                     </label>
                     <input
@@ -341,7 +342,10 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-subject" className="mb-2 block text-xs font-semibold text-slate-300">
+                  <label
+                    htmlFor="contact-subject"
+                    className="mb-2 block text-xs font-semibold text-slate-300"
+                  >
                     Subject
                   </label>
                   <input
@@ -357,7 +361,10 @@ export function ContactForm() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="mb-2 block text-xs font-semibold text-slate-300">
+                  <label
+                    htmlFor="contact-message"
+                    className="mb-2 block text-xs font-semibold text-slate-300"
+                  >
                     Your Message
                   </label>
                   <textarea
