@@ -7,6 +7,8 @@ import { Hero } from './Components/Hero';
 import { Layout } from './Components/Layout/Layout';
 import { About } from './Components/About/About';
 import { SkillsHero } from './Components/Skills/Skills';
+import { LetsConnect } from './Components/Contact/LetsConnect';
+
 
 
 function App() {
@@ -35,7 +37,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/skills' element={<SkillsHero />} />
           <Route path='projects' />
-          <Route path='/contact'  />
+          <Route path='/contact' element={<LetsConnect />} />
         </Route>
       </Routes>
     </>
