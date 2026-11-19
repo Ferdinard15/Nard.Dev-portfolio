@@ -8,6 +8,7 @@ import { Layout } from './Components/Layout/Layout';
 import { About } from './Components/About/About';
 import { SkillsHero } from './Components/Skills/Skills';
 import { LetsConnect } from './Components/Contact/LetsConnect';
+import { Projects } from './Components/Projects/Projects';
 
 
 
@@ -36,7 +37,7 @@ function App() {
           {/* Future routes go here */}
           <Route path='/about' element={<About />} />
           <Route path='/skills' element={<SkillsHero />} />
-          <Route path='projects' />
+          <Route path='projects' element={<Projects />} />
           <Route path='/contact' element={<LetsConnect />} />
         </Route>
       </Routes>
