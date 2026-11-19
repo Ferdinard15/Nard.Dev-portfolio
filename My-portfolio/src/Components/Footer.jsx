@@ -167,8 +167,8 @@ export function Footer() {
               </div>
 
               <span className="text-2xl font-black tracking-tight">
-                Ferdi
-                <span className="text-cyan-400">nard.</span>
+                Nard
+                <span className="text-cyan-400">.Dev</span>
               </span>
 
             </a>
