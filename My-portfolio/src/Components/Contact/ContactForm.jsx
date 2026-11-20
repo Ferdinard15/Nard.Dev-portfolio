@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+
 import {
   ArrowUpRight,
   Check,
@@ -10,58 +11,13 @@ import {
   Send,
 } from "lucide-react";
 
-// SVG SOCIAL ICONS
-const GithubIcon = ({ size = 20 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaXTwitter,
+} from "react-icons/fa6";
 
-const LinkedinIcon = ({ size = 20 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-const TwitterIcon = ({ size = 20 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
-
+// ANIMATION
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: {
@@ -71,8 +27,10 @@ const fadeUp = {
   },
 };
 
+// EMAIL
 const email = "hello@nard.dev";
 
+// CONTACT DETAILS
 const contactDetails = [
   {
     icon: Mail,
@@ -92,19 +50,20 @@ const contactDetails = [
   },
 ];
 
+// SOCIAL LINKS - REACT ICONS
 const socialLinks = [
   {
-    icon: GithubIcon,
+    icon: FaGithub,
     name: "GitHub",
     href: "https://github.com/",
   },
   {
-    icon: LinkedinIcon,
+    icon: FaLinkedinIn,
     name: "LinkedIn",
     href: "https://linkedin.com/",
   },
   {
-    icon: TwitterIcon,
+    icon: FaXTwitter,
     name: "Twitter",
     href: "https://twitter.com/",
   },
@@ -112,6 +71,7 @@ const socialLinks = [
 
 export function ContactForm() {
   const [copied, setCopied] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -119,16 +79,19 @@ export function ContactForm() {
     message: "",
   });
 
+  // COPY EMAIL
   const handleCopyEmail = async () => {
     try {
       await navigator.clipboard.writeText(email);
       setCopied(true);
+
       setTimeout(() => setCopied(false), 2000);
     } catch {
       window.location.href = `mailto:${email}`;
     }
   };
 
+  // HANDLE INPUT CHANGES
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -136,6 +99,7 @@ export function ContactForm() {
     });
   };
 
+  // HANDLE FORM SUBMISSION
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -152,6 +116,7 @@ export function ContactForm() {
     <section className="py-12 sm:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+
           {/* LEFT SIDE */}
           <motion.div
             initial="hidden"
@@ -159,9 +124,12 @@ export function ContactForm() {
             viewport={{ once: true, amount: 0.2 }}
             variants={{
               hidden: {},
-              visible: { transition: { staggerChildren: 0.15 } },
+              visible: {
+                transition: { staggerChildren: 0.15 },
+              },
             }}
           >
+            {/* HEADING */}
             <motion.div variants={fadeUp} className="mb-9">
               <h3 className="text-2xl font-bold sm:text-3xl">
                 Get in touch
@@ -190,7 +158,10 @@ export function ContactForm() {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <p className="text-xs text-slate-500">{item.label}</p>
+                      <p className="text-xs text-slate-500">
+                        {item.label}
+                      </p>
+
                       <p className="mt-1 break-words text-sm font-semibold text-slate-200">
                         {item.value}
                       </p>
@@ -207,7 +178,11 @@ export function ContactForm() {
 
                 return (
                   <motion.div key={item.label} variants={fadeUp}>
-                    {item.href ? <a href={item.href}>{content}</a> : content}
+                    {item.href ? (
+                      <a href={item.href}>{content}</a>
+                    ) : (
+                      content
+                    )}
                   </motion.div>
                 );
               })}
@@ -224,15 +199,22 @@ export function ContactForm() {
                   <p className="text-[11px] uppercase tracking-widest text-slate-500">
                     Prefer email?
                   </p>
+
                   <p className="mt-1 truncate text-sm font-semibold text-cyan-300">
                     {email}
                   </p>
                 </div>
 
                 {copied ? (
-                  <Check size={18} className="shrink-0 text-emerald-400" />
+                  <Check
+                    size={18}
+                    className="shrink-0 text-emerald-400"
+                  />
                 ) : (
-                  <Copy size={17} className="shrink-0 text-slate-400" />
+                  <Copy
+                    size={17}
+                    className="shrink-0 text-slate-400"
+                  />
                 )}
               </button>
 
@@ -260,11 +242,17 @@ export function ContactForm() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.name}
-                      whileHover={{ y: -6, scale: 1.1, rotate: 5 }}
+                      title={social.name}
+                      whileHover={{
+                        y: -6,
+                        scale: 1.1,
+                        rotate: 5,
+                      }}
                       whileTap={{ scale: 0.94 }}
                       className="group relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] text-slate-400 transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-300"
                     >
                       <span className="absolute inset-0 scale-0 rounded-xl bg-cyan-400/10 transition-transform duration-300 group-hover:scale-100" />
+
                       <span className="relative z-10">
                         <Icon size={21} />
                       </span>
@@ -277,31 +265,54 @@ export function ContactForm() {
 
           {/* RIGHT SIDE - CONTACT FORM */}
           <motion.div
-            initial={{ opacity: 0, y: 35, scale: 0.98 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{
+              opacity: 0,
+              y: 35,
+              scale: 0.98,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+            }}
             className="relative"
           >
+            {/* GLOW EFFECT */}
             <div className="absolute -inset-1 rounded-3xl bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-transparent blur-xl" />
 
+            {/* FORM CONTAINER */}
             <div className="relative rounded-3xl border border-white/10 bg-[#0a1424]/90 p-6 shadow-2xl backdrop-blur-2xl sm:p-9">
+
+              {/* FORM HEADING */}
               <div className="mb-8">
                 <div className="mb-3 flex items-center gap-2 text-cyan-400">
                   <Send size={17} />
+
                   <span className="text-xs font-bold uppercase tracking-widest">
                     Send a message
                   </span>
                 </div>
 
-                <h3 className="text-2xl font-bold">Let's talk about it.</h3>
+                <h3 className="text-2xl font-bold">
+                  Let's talk about it.
+                </h3>
+
                 <p className="mt-2 text-sm text-slate-400">
                   Fill in the details below and let's start a conversation.
                 </p>
               </div>
 
+              {/* FORM */}
               <form onSubmit={handleSubmit} className="space-y-5">
+
+                {/* NAME AND EMAIL */}
                 <div className="grid gap-5 sm:grid-cols-2">
+
                   <div>
                     <label
                       htmlFor="contact-name"
@@ -309,6 +320,7 @@ export function ContactForm() {
                     >
                       Your Name
                     </label>
+
                     <input
                       id="contact-name"
                       name="name"
@@ -328,6 +340,7 @@ export function ContactForm() {
                     >
                       Email Address
                     </label>
+
                     <input
                       id="contact-email"
                       name="email"
@@ -341,6 +354,7 @@ export function ContactForm() {
                   </div>
                 </div>
 
+                {/* SUBJECT */}
                 <div>
                   <label
                     htmlFor="contact-subject"
@@ -348,6 +362,7 @@ export function ContactForm() {
                   >
                     Subject
                   </label>
+
                   <input
                     id="contact-subject"
                     name="subject"
@@ -360,6 +375,7 @@ export function ContactForm() {
                   />
                 </div>
 
+                {/* MESSAGE */}
                 <div>
                   <label
                     htmlFor="contact-message"
@@ -367,6 +383,7 @@ export function ContactForm() {
                   >
                     Your Message
                   </label>
+
                   <textarea
                     id="contact-message"
                     name="message"
@@ -379,6 +396,7 @@ export function ContactForm() {
                   />
                 </div>
 
+                {/* SUBMIT BUTTON */}
                 <motion.button
                   type="submit"
                   whileHover={{
@@ -389,6 +407,7 @@ export function ContactForm() {
                   className="group flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 text-sm font-bold text-slate-950 transition"
                 >
                   Send Message
+
                   <ArrowUpRight
                     size={18}
                     className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"

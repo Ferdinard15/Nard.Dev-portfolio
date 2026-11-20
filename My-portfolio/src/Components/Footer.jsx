@@ -10,69 +10,13 @@ import {
   Globe,
 } from "lucide-react";
 
-// GITHUB ICON
-const GithubIcon = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
-
-// LINKEDIN ICON
-const LinkedinIcon = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
-
-// TWITTER ICON
-const TwitterIcon = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
-
-// WHATSAPP ICON
-const WhatsAppIcon = ({ size = 18 }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.5 0 .15 5.35.15 11.93c0 2.1.55 4.15 1.6 5.96L0 24l6.27-1.65a11.9 11.9 0 0 0 5.8 1.48h.01c6.58 0 11.93-5.35 11.93-11.93 0-3.19-1.24-6.19-3.49-8.42ZM12.08 21.8a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.72.98.99-3.63-.24-.37a9.84 9.84 0 0 1-1.52-5.26c0-5.48 4.46-9.94 9.95-9.94a9.87 9.87 0 0 1 7.03 2.92 9.87 9.87 0 0 1 2.91 7.03c0 5.48-4.46 9.94-9.94 9.94Zm5.46-7.45c-.3-.15-1.77-.87-2.05-.97-.28-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.47-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.28.3-1.05 1.02-1.05 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.48.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z" />
-  </svg>
-);
+import {
+  FaGithub,
+  FaLinkedinIn,
+  FaXTwitter,
+  FaEnvelope,
+  FaWhatsapp,
+} from "react-icons/fa6";
 
 // QUICK LINKS
 const quickLinks = [
@@ -88,22 +32,22 @@ const quickLinks = [
 const socialLinks = [
   {
     name: "GitHub",
-    icon: GithubIcon,
+    icon: FaGithub,
     href: "https://github.com/",
   },
   {
     name: "LinkedIn",
-    icon: LinkedinIcon,
+    icon: FaLinkedinIn,
     href: "https://linkedin.com/",
   },
   {
     name: "Twitter",
-    icon: TwitterIcon,
+    icon: FaXTwitter,
     href: "https://twitter.com/",
   },
   {
     name: "Email",
-    icon: Mail,
+    icon: FaEnvelope,
     href: "mailto:Ferdinardemeneka71@gmail.com",
   },
 ];
@@ -134,7 +78,6 @@ const staggerContainer = {
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
-
   return (
     <footer className="relative isolate overflow-hidden bg-[#050b16] text-white">
 
@@ -152,7 +95,7 @@ export function Footer() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.15 }}
           variants={staggerContainer}
           className="grid gap-14 pb-16 md:grid-cols-2 lg:grid-cols-4 lg:gap-10"
         >
@@ -211,7 +154,7 @@ export function Footer() {
                     key={social.name}
                     href={social.href}
                     target={social.name === "Email" ? undefined : "_blank"}
-                    rel={social.name === "Email" ? undefined : "noreferrer"}
+                    rel={social.name === "Email" ? undefined : "noopener noreferrer"}
                     aria-label={social.name}
                     title={social.name}
                     whileHover={{ y: -5, scale: 1.08 }}
@@ -300,11 +243,11 @@ export function Footer() {
               <a
                 href="https://wa.me/2347063392871"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-sm text-slate-400 transition-colors duration-300 hover:text-cyan-300"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-cyan-400 transition-all duration-300 group-hover:border-cyan-400/40 group-hover:bg-cyan-400/10">
-                  <WhatsAppIcon size={19} />
+                  <FaWhatsapp size={19} />
                 </div>
 
                 <div>
@@ -317,7 +260,7 @@ export function Footer() {
               <a
                 href="https://www.google.com/maps/search/?api=1&query=Enugu%2C%20Nigeria"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 text-sm text-slate-400 transition-colors duration-300 hover:text-cyan-300"
               >
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-cyan-400 transition-all duration-300 group-hover:border-cyan-400/40 group-hover:bg-cyan-400/10">
