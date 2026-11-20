@@ -19,6 +19,9 @@ import {
   Monitor,
   Zap,
 } from "lucide-react";
+import { ProjectSection } from "./ProjectSection";
+import { OpportunitiesSection } from "../About/OpportunitiesSection";
+
 
 // PROJECT CATEGORIES
 const projects = [
@@ -90,6 +93,7 @@ export function Projects() {
   const liveProjects = 4;
 
   return (
+    <>
     <section
       id="projects-hero"
       className="relative isolate overflow-hidden bg-[#050b16] px-6 pb-24 pt-36 text-white lg:px-10"
@@ -434,6 +438,9 @@ export function Projects() {
       {/* BOTTOM ACCENT */}
       <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
     </section>
+     <ProjectSection />
+     <OpportunitiesSection />
+    </>
   );
 }
 
