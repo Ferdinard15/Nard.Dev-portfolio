@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
@@ -11,6 +12,9 @@ import {
 } from "lucide-react";
 
 import { FaGithub } from "react-icons/fa";
+
+// ANIMATED ROUTER LINK
+const MotionLink = motion.create(Link);
 
 // PROJECT DATA
 const projectData = [
@@ -321,7 +325,7 @@ export function ProjectSection() {
                 </div>
               </div>
 
-              {/* SAME CYAN-BLUE BOTTOM GLOW ON ALL CARDS */}
+              {/* CYAN-BLUE BOTTOM GLOW */}
               <div
                 className={`absolute bottom-0 left-0 h-[2px] w-0 bg-gradient-to-r ${project.accent} transition-all duration-500 group-hover:w-full`}
               />
@@ -340,8 +344,9 @@ export function ProjectSection() {
             Have an idea you'd like to bring to life?
           </p>
 
-          <motion.a
-            href="#contact"
+          {/* UPDATED REACT ROUTER LINK */}
+          <MotionLink
+            to="/contact"
             whileHover={{ scale: 1.05, y: -3 }}
             whileTap={{ scale: 0.96 }}
             className="inline-flex items-center gap-3 rounded-xl border border-cyan-400/30 bg-cyan-400/10 px-7 py-3.5 text-sm font-bold text-cyan-300 transition hover:bg-cyan-400 hover:text-slate-950"
@@ -349,7 +354,7 @@ export function ProjectSection() {
             Let's Build Something
 
             <ArrowUpRight size={18} />
-          </motion.a>
+          </MotionLink>
         </motion.div>
 
       </div>

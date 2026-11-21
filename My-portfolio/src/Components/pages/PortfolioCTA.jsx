@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Zap, Sparkles } from "lucide-react";
 
@@ -14,7 +15,6 @@ export function PortfolioCTA() {
       <div className="pointer-events-none absolute -right-40 bottom-0 -z-10 h-80 w-80 rounded-full bg-blue-500/10 blur-[120px]" />
 
       <div className="mx-auto max-w-7xl">
-
         <motion.div
           initial={{ opacity: 0, y: 50, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -50,7 +50,6 @@ export function PortfolioCTA() {
           />
 
           <div className="relative z-10">
-
             {/* ICON */}
             <motion.div
               animate={{
@@ -91,24 +90,27 @@ export function PortfolioCTA() {
               collaborations, and exciting projects.
             </p>
 
-            {/* CTA BUTTON */}
-            <motion.a
-              href="#contact"
+            {/* CTA BUTTON - NAVIGATE TO CONTACT PAGE */}
+            <motion.div
               whileHover={{
                 scale: 1.05,
                 y: -4,
               }}
               whileTap={{ scale: 0.96 }}
-              className="group mt-9 inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-4 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-shadow duration-300 hover:shadow-cyan-400/40"
+              className="mt-9 inline-block"
             >
-              Let's Talk About Your Project
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-4 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-shadow duration-300 hover:shadow-cyan-400/40"
+              >
+                Let's Talk About Your Project
 
-              <ArrowUpRight
-                size={20}
-                className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-              />
-            </motion.a>
-
+                <ArrowUpRight
+                  size={20}
+                  className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                />
+              </Link>
+            </motion.div>
           </div>
         </motion.div>
       </div>

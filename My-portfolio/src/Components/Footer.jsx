@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -18,13 +19,16 @@ import {
   FaWhatsapp,
 } from "react-icons/fa6";
 
+// ANIMATED REACT ROUTER LINK
+const MotionLink = motion.create(Link);
+
 // QUICK LINKS
 const quickLinks = [
   { name: "Home", href: "#home" },
   { name: "About Me", href: "#about" },
   { name: "Why Work With Me", href: "#why-me" },
-  { name: "My Skills", href: "#skills" },
-  { name: "My Projects", href: "#projects" },
+  { name: "My Skills", to: "/skills" },
+  { name: "My Projects", to: "/projects" },
   { name: "How I Work", href: "#process" },
 ];
 
@@ -154,7 +158,11 @@ export function Footer() {
                     key={social.name}
                     href={social.href}
                     target={social.name === "Email" ? undefined : "_blank"}
-                    rel={social.name === "Email" ? undefined : "noopener noreferrer"}
+                    rel={
+                      social.name === "Email"
+                        ? undefined
+                        : "noopener noreferrer"
+                    }
                     aria-label={social.name}
                     title={social.name}
                     whileHover={{ y: -5, scale: 1.08 }}
@@ -178,22 +186,41 @@ export function Footer() {
 
             <div className="mt-7 space-y-4">
 
-              {quickLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="group flex w-fit items-center gap-2 text-sm text-slate-400 transition-all duration-300 hover:translate-x-2 hover:text-cyan-300"
-                >
-                  <span className="h-1 w-1 rounded-full bg-cyan-400 opacity-0 transition-opacity group-hover:opacity-100" />
+              {quickLinks.map((link) => {
+                const linkContent = (
+                  <>
+                    <span className="h-1 w-1 rounded-full bg-cyan-400 opacity-0 transition-opacity group-hover:opacity-100" />
 
-                  {link.name}
+                    {link.name}
 
-                  <ArrowUpRight
-                    size={13}
-                    className="opacity-0 transition-all duration-300 group-hover:opacity-100"
-                  />
-                </a>
-              ))}
+                    <ArrowUpRight
+                      size={13}
+                      className="opacity-0 transition-all duration-300 group-hover:opacity-100"
+                    />
+                  </>
+                );
+
+                const linkClass =
+                  "group flex w-fit items-center gap-2 text-sm text-slate-400 transition-all duration-300 hover:translate-x-2 hover:text-cyan-300";
+
+                return link.to ? (
+                  <Link
+                    key={link.name}
+                    to={link.to}
+                    className={linkClass}
+                  >
+                    {linkContent}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={linkClass}
+                  >
+                    {linkContent}
+                  </a>
+                );
+              })}
 
             </div>
           </motion.div>
@@ -293,8 +320,9 @@ export function Footer() {
               you.
             </p>
 
-            <motion.a
-              href="#contact"
+            {/* CONTACT PAGE LINK */}
+            <MotionLink
+              to="/contact"
               whileHover={{ scale: 1.04, y: -3 }}
               whileTap={{ scale: 0.96 }}
               className="group mt-6 inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-5 py-3.5 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-shadow hover:shadow-cyan-400/40"
@@ -305,7 +333,7 @@ export function Footer() {
                 size={18}
                 className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
               />
-            </motion.a>
+            </MotionLink>
 
             <div className="mt-8 flex items-center gap-2 text-xs text-slate-500">
               <Globe size={15} className="text-cyan-400" />

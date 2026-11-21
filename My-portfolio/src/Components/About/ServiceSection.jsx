@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -267,13 +268,14 @@ export function ServicesSection() {
             Have an idea or a technical challenge?
           </p>
 
-          <a
-            href="#contact"
+          {/* UPDATED REACT ROUTER LINK */}
+          <Link
+            to="/contact"
             className="mt-5 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-3.5 font-semibold text-slate-950 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-cyan-500/20"
           >
             Let's Work Together
             <ArrowUpRight size={18} />
-          </a>
+          </Link>
         </motion.div>
       </div>
 

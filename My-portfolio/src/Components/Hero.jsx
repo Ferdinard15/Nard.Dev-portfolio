@@ -1,4 +1,6 @@
+
 import { useState } from "react";
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
@@ -9,6 +11,7 @@ import {
   Sparkles,
   Terminal,
 } from "lucide-react";
+
 import { AboutSection } from "./pages/AboutSection";
 import { TechStack } from "./pages/TechStack";
 import { MyApproach } from "./pages/MyApproach";
@@ -29,10 +32,14 @@ export function Hero() {
   const [activeTab, setActiveTab] = useState("profile");
   const [copied, setCopied] = useState(false);
 
-  const handleCopyCommand = () => {
-    navigator.clipboard?.writeText("npx nard-dev --hire");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopyCommand = async () => {
+    try {
+      await navigator.clipboard.writeText("npx nard-dev --hire");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
@@ -54,6 +61,7 @@ export function Hero() {
 
         {/* HERO CONTENT */}
         <div className="relative mx-auto grid min-h-[calc(100vh-76px)] max-w-7xl items-center gap-14 px-6 pt-28 pb-16 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:pt-24">
+
           {/* LEFT COLUMN */}
           <motion.div
             variants={{
@@ -145,32 +153,41 @@ export function Hero() {
               ))}
             </motion.div>
 
-            {/* CTA BUTTONS */}
+            {/* CTA BUTTONS - REACT ROUTER NAVIGATION */}
             <motion.div
               variants={fadeUp}
               className="mt-9 flex flex-wrap items-center gap-4"
             >
-              <motion.a
-                href="#projects"
+              {/* VIEW PROJECTS */}
+              <motion.div
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition"
               >
-                View Projects
-                <ArrowRight
-                  size={18}
-                  className="transition-transform group-hover:translate-x-1"
-                />
-              </motion.a>
+                <Link
+                  to="/projects"
+                  className="group flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition"
+                >
+                  View Projects
 
-              <motion.a
-                href="#contact"
+                  <ArrowRight
+                    size={18}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </Link>
+              </motion.div>
+
+              {/* GET IN TOUCH */}
+              <motion.div
                 whileHover={{ scale: 1.03, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur-md transition hover:border-cyan-400/60 hover:text-cyan-300"
               >
-                Get in Touch
-              </motion.a>
+                <Link
+                  to="/contact"
+                  className="flex items-center gap-2.5 rounded-xl border border-white/20 bg-white/5 px-7 py-3.5 font-semibold text-white backdrop-blur-md transition hover:border-cyan-400/60 hover:text-cyan-300"
+                >
+                  Get in Touch
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* VALUE METRICS */}
@@ -219,6 +236,7 @@ export function Hero() {
 
             {/* CODE EDITOR CARD */}
             <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-[#091324]/90 shadow-2xl backdrop-blur-2xl">
+
               {/* WINDOW HEADER & TABS */}
               <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3">
                 <div className="flex items-center gap-2">
@@ -229,6 +247,7 @@ export function Hero() {
 
                 <div className="flex gap-1 rounded-lg bg-[#050b16]/80 p-1 text-xs">
                   <button
+                    type="button"
                     onClick={() => setActiveTab("profile")}
                     className={`rounded-md px-3 py-1 font-medium transition ${
                       activeTab === "profile"
@@ -240,6 +259,7 @@ export function Hero() {
                   </button>
 
                   <button
+                    type="button"
                     onClick={() => setActiveTab("stack")}
                     className={`rounded-md px-3 py-1 font-medium transition ${
                       activeTab === "stack"
@@ -334,6 +354,7 @@ export function Hero() {
                   </div>
 
                   <button
+                    type="button"
                     onClick={handleCopyCommand}
                     className="flex items-center gap-1.5 rounded-md bg-white/5 px-2.5 py-1 text-xs text-slate-300 transition hover:bg-cyan-400/20 hover:text-cyan-300"
                     title="Copy command"
@@ -397,6 +418,7 @@ export function Hero() {
         <div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
       </section>
 
+      {/* HOMEPAGE SECTIONS */}
       <AboutSection />
       <TechStack />
       <MyApproach />

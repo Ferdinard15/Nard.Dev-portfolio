@@ -1,6 +1,10 @@
 
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+
+// Framer Motion + React Router Link
+const MotionLink = motion.create(Link);
 
 export function OpportunitiesSection() {
   return (
@@ -65,6 +69,7 @@ export function OpportunitiesSection() {
 
           {/* CENTERED CONTENT */}
           <div className="relative z-10 flex flex-col items-center text-center">
+
             {/* AVAILABILITY BADGE */}
             <motion.div
               initial={{ opacity: 0, y: -15 }}
@@ -74,6 +79,7 @@ export function OpportunitiesSection() {
               className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-medium text-cyan-300"
             >
               <Sparkles size={15} />
+
               <span>Open for opportunities</span>
 
               <span className="relative ml-1 flex h-2 w-2">
@@ -82,7 +88,7 @@ export function OpportunitiesSection() {
               </span>
             </motion.div>
 
-            {/* HEADING - ONE LINE */}
+            {/* HEADING */}
             <motion.h2
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -121,8 +127,8 @@ export function OpportunitiesSection() {
               }}
               className="mt-7 flex flex-col items-center"
             >
-              <motion.a
-                href="#contact"
+              <MotionLink
+                to="/contact"
                 whileHover={{
                   scale: 1.06,
                   y: -5,
@@ -143,7 +149,7 @@ export function OpportunitiesSection() {
                   size={20}
                   className="relative transition-transform duration-300 group-hover/button:-translate-y-1 group-hover/button:translate-x-1"
                 />
-              </motion.a>
+              </MotionLink>
 
               {/* SUPPORTING TEXT */}
               <motion.p

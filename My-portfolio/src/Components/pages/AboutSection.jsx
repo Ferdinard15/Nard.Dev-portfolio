@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -265,21 +266,25 @@ export function AboutSection() {
               </p>
             </motion.div>
 
-            {/* CTA */}
+            {/* CTA - NAVIGATE TO CONTACT PAGE */}
             <motion.div variants={fadeUp} className="mt-9">
-              <motion.a
-                href="#contact"
+              <motion.div
                 whileHover={{ scale: 1.04, y: -3 }}
                 whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20"
+                className="inline-block"
               >
-                Let's Work Together
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-7 py-3.5 font-bold text-slate-950 shadow-lg shadow-cyan-500/20 transition-shadow hover:shadow-cyan-400/40"
+                >
+                  Let's Work Together
 
-                <ArrowUpRight
-                  size={19}
-                  className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                />
-              </motion.a>
+                  <ArrowUpRight
+                    size={19}
+                    className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  />
+                </Link>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>
@@ -290,5 +295,3 @@ export function AboutSection() {
     </section>
   );
 }
-
-

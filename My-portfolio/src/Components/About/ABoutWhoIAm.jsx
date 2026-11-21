@@ -1,4 +1,5 @@
 
+import { Link } from "react-router";
 import { useRef } from "react";
 import {
   motion,
@@ -46,9 +47,10 @@ const paragraphs = [
   </>,
   <>
     I work with modern technologies including
-    <strong className="font-medium text-cyan-300"> React, JavaScript,
-    Node.js, Express, MongoDB, and Tailwind CSS.</strong> My focus is
-    on creating responsive interfaces, writing maintainable code,
+    <strong className="font-medium text-cyan-300">
+      {" "}React, JavaScript, Node.js, Express, MongoDB, and Tailwind CSS.
+    </strong>{" "}
+    My focus is on creating responsive interfaces, writing maintainable code,
     solving problems, and delivering meaningful user experiences.
   </>,
   <>
@@ -444,29 +446,29 @@ export function AboutWhoIAm() {
               </div>
             </motion.div>
 
-            {/* CLOSING LINK */}
-            <motion.a
-              href="#projects"
+            {/* CLOSING LINK - NAVIGATE TO PROJECTS PAGE */}
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               whileHover={{ x: 8 }}
-              className="mt-9 inline-flex w-fit items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-cyan-400"
+              className="mt-9 w-fit"
             >
-              Explore what I build
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:text-cyan-400"
+              >
+                Explore what I build
 
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-cyan-400/20 text-cyan-400 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10">
-                <ArrowUpRight size={17} />
-              </span>
-            </motion.a>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-cyan-400/20 text-cyan-400 transition-all duration-300 hover:border-cyan-400 hover:bg-cyan-400/10">
+                  <ArrowUpRight size={17} />
+                </span>
+              </Link>
+            </motion.div>
           </div>
         </div>
-
-    
       </div>
     </section>
   );
 }
-
-
