@@ -458,7 +458,7 @@ export function About() {
                     <div className="relative h-full w-full overflow-hidden rounded-[1.5rem]">
 
                       <img
-                        src="/Images/Nard.jpeg"
+                        src="/Images/Nard.png"
                         alt="Ferdinard - Full-Stack Web Developer"
                         className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       />

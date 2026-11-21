@@ -95,7 +95,7 @@ export function AboutSection() {
 
                 <div className="relative overflow-hidden rounded-2xl border border-cyan-400/20 bg-[#050b16] p-2">
                   <img
-                    src="/Images/Nard.jpeg"
+                    src="/Images/Nard.png"
                     alt="Ferdinard - Full-Stack Developer"
                     className="h-[420px] w-full rounded-xl object-contain object-center"
                   />
