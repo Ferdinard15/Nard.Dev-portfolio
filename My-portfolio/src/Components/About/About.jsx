@@ -122,6 +122,10 @@ function AnimatedCounter({ value, suffix }) {
     return () => controls.stop();
   }, [isInView, value, count]);
 
+   useEffect(() => {
+    document.title = "About | Nard.Dev";
+  }, []);
+
   return (
     <div ref={ref} className="flex items-center justify-center">
       <motion.span className="text-3xl font-extrabold tracking-tight text-cyan-400 sm:text-4xl">

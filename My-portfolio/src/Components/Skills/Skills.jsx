@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import {
   Code2,
   Database,
@@ -12,6 +13,10 @@ import { OpportunitiesSection } from "../About/OpportunitiesSection.jsx";
 
 
 export function SkillsHero() {
+  useEffect(() => {
+      document.title = "Skills | Nard.Dev";
+    }, []);
+
   return (
     <>
     <section className="relative isolate overflow-hidden bg-[#050b16] px-5 py-20 text-white sm:px-8 lg:px-12">

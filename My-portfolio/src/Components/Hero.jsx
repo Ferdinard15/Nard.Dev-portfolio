@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import {
@@ -41,6 +41,10 @@ export function Hero() {
       setCopied(false);
     }
   };
+
+  useEffect(() => {
+    document.title = "Nard.Dev-portfolio";
+  }, []);
 
   return (
     <>

@@ -82,6 +82,10 @@ function AnimatedNumber({ value, suffix = "+" }) {
     return controls.stop;
   }, [isInView, motionValue, value]);
 
+  useEffect(() => {
+    document.title = "Projects | Nard.Dev";
+  }, []);
+
   return (
     <span ref={ref}>
       <motion.span>{rounded}</motion.span>

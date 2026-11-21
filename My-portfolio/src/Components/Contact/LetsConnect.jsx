@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { ContactForm } from "./ContactForm";
@@ -14,6 +14,10 @@ const fadeUp = {
 };
 
 export function LetsConnect() {
+  useEffect(() => {
+      document.title = "Contact | Nard.Dev";
+    }, []);
+
   return (
     <>
       <motion.div
