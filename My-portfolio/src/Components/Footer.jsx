@@ -25,7 +25,7 @@ const MotionLink = motion.create(Link);
 // QUICK LINKS
 const quickLinks = [
   { name: "Home", href: "#home" },
-  { name: "About Me", href: "#about" },
+  { name: "About Me", to: "/about" },
   { name: "Why Work With Me", href: "#why-me" },
   { name: "My Skills", to: "/skills" },
   { name: "My Projects", to: "/projects" },
