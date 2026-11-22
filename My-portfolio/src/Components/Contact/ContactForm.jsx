@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -50,7 +51,7 @@ const contactDetails = [
   },
 ];
 
-// SOCIAL LINKS - REACT ICONS
+// SOCIAL LINKS
 const socialLinks = [
   {
     icon: FaGithub,
@@ -71,6 +72,7 @@ const socialLinks = [
 
 export function ContactForm() {
   const [copied, setCopied] = useState(false);
+  const [agreedToPolicy, setAgreedToPolicy] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -103,10 +105,16 @@ export function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!agreedToPolicy) return;
+
     const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(
       formData.subject,
     )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`,
+      `Name: ${formData.name}
+Email: ${formData.email}
+Privacy Policy and Terms: Agreed
+
+${formData.message}`,
     )}`;
 
     window.location.href = mailtoLink;
@@ -396,15 +404,57 @@ export function ContactForm() {
                   />
                 </div>
 
+                {/* POLICY AGREEMENT */}
+                <div className="flex items-start gap-3">
+                  <input
+                    id="agree-policy"
+                    type="checkbox"
+                    checked={agreedToPolicy}
+                    onChange={(e) => setAgreedToPolicy(e.target.checked)}
+                    required
+                    className="mt-1 h-4 w-4 shrink-0 cursor-pointer accent-cyan-400"
+                  />
+
+                  <label
+                    htmlFor="agree-policy"
+                    className="text-xs leading-6 text-slate-400"
+                  >
+                    I agree to the{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline"
+                    >
+                      Privacy Policy
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="/terms-of-service"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold text-cyan-400 transition hover:text-cyan-300 hover:underline"
+                    >
+                      Terms of Service
+                    </a>
+                    .
+                  </label>
+                </div>
+
                 {/* SUBMIT BUTTON */}
                 <motion.button
                   type="submit"
-                  whileHover={{
-                    scale: 1.02,
-                    boxShadow: "0 10px 35px rgba(34,211,238,0.2)",
-                  }}
-                  whileTap={{ scale: 0.97 }}
-                  className="group flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 text-sm font-bold text-slate-950 transition"
+                  disabled={!agreedToPolicy}
+                  whileHover={
+                    agreedToPolicy
+                      ? {
+                          scale: 1.02,
+                          boxShadow: "0 10px 35px rgba(34,211,238,0.2)",
+                        }
+                      : {}
+                  }
+                  whileTap={agreedToPolicy ? { scale: 0.97 } : {}}
+                  className="group flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-4 text-sm font-bold text-slate-950 transition disabled:cursor-not-allowed disabled:opacity-40"
                 >
                   Send Message
 
