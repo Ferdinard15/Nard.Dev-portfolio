@@ -37,17 +37,17 @@ const socialLinks = [
   {
     name: "GitHub",
     icon: FaGithub,
-    href: "https://github.com/",
+    href: "https://github.com/Ferdinard15",
   },
   {
     name: "LinkedIn",
     icon: FaLinkedinIn,
-    href: "https://linkedin.com/",
+    href: "http://www.linkedin.com/in/dumebi-emeneka-3a790638a",
   },
   {
     name: "Twitter",
     icon: FaXTwitter,
-    href: "https://twitter.com/",
+    href: "https://x.com/EmenekaF",
   },
   {
     name: "Email",

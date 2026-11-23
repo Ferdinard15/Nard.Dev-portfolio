@@ -28,12 +28,12 @@ import { OpportunitiesSection } from "./OpportunitiesSection";
 const socialLinks = [
   {
     name: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/Ferdinard15",
     icon: FaGithub,
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/",
+    href: "http://www.linkedin.com/in/dumebi-emeneka-3a790638a",
     icon: FaLinkedinIn,
   },
   {

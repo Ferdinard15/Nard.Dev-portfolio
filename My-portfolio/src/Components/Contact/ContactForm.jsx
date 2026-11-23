@@ -56,17 +56,17 @@ const socialLinks = [
   {
     icon: FaGithub,
     name: "GitHub",
-    href: "https://github.com/",
+    href: "https://github.com/Ferdinard15",
   },
   {
     icon: FaLinkedinIn,
     name: "LinkedIn",
-    href: "https://linkedin.com/",
+    href: "http://www.linkedin.com/in/dumebi-emeneka-3a790638a",
   },
   {
     icon: FaXTwitter,
     name: "Twitter",
-    href: "https://twitter.com/",
+    href: "https://x.com/EmenekaF",
   },
 ];
 
