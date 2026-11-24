@@ -97,8 +97,8 @@ function AnimatedNumber({ value, suffix = "+" }) {
 // PROJECTS HERO
 export function Projects() {
   // Update these numbers to match your actual projects.
-  const totalProjects = 12;
-  const liveProjects = 4;
+  const totalProjects = 4;
+  const liveProjects = 0;
 
   return (
     <>
