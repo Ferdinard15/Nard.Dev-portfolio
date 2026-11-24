@@ -29,7 +29,7 @@ const fadeUp = {
 };
 
 // EMAIL
-const email = "hello@nard.dev";
+const email = "Ferdinardemeneka71@gmail.com";
 
 // CONTACT DETAILS
 const contactDetails = [
